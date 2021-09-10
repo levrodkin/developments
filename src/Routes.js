@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router'
 import AddEvent from './components/AddEvent'
-import Development from './components/Development'
+import Development from './components/Events'
 
 const routes = () => {
   return (
