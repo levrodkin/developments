@@ -1,12 +1,8 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles((theme) => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -23,12 +19,12 @@ export default function Datepicker(props) {
   }
 
   return (
-    <form className={classes.container} noValidate>
+    <form noValidate>
       <TextField onChange={e => eventData(e.target.value)}
         id="date"
         label="Выберите дату"
         type="date"
-        defaultValue="2021-09-09"
+        defaultValue="2021-09-10"
         className={classes.textField}
         InputLabelProps={{
           shrink: true,

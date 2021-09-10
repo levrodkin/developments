@@ -29,18 +29,19 @@ const useStyles = makeStyles((theme) => ({
 const Development = () => {
   const classes = useStyles();
   const [events, setEvents] = useState([])
+  const [data, setData] = useState(["2021-09-10"])
 
   useEffect(() => {
     if (localStorage.getItem("events")) {
       setEvents(JSON.parse(localStorage.getItem("events")))
+      console.log(data)
     }
-  }, [])
+  }, data)
 
-  
-  let data = "2021-09-09"
+
   const eventData = (e) => {
-    data = e
-    console.log(e, data)
+    setData([e])
+    console.log(data[0])
     return e
   }
 
@@ -51,19 +52,21 @@ const Development = () => {
         <Datepicker eventData={eventData} />
         <Button variant="contained" color="primary" component={Link} to={'/add'}>Добавить</Button>
       </div>
-      <Box className={classes.box} overflow="scroll">
-        {events.filter(elem => elem.data === data).map(e =>
-          <Card className={classes.card} key={e.id}>
-            {console.log(eventData(), e.data)}
-            <Typography variant='h5'>{e.title}</Typography>
-            {e.type === 1 ? <Typography variant='h6'>бюджет :{e.money}</Typography>
-              : e.type === 2 ? <>
-              <Typography variant='h6'>где :{e.where}</Typography>
-              <Typography variant='h6'>Во сколько :{e.time}</Typography>
-            </> : <Typography variant='h6'>{e.text}</Typography>}
-          </Card>
-        )}
-      </Box>
+      {events.filter(elem => elem.data === data[0]).length > 0 &&
+        <Box className={classes.box} overflow="scroll">
+          {events.filter(elem => elem.data === data[0]).map(e =>
+            <Card className={classes.card} key={e.id}>
+              {console.log(data[0], e.data)}
+              <Typography variant='h5'>{e.title}</Typography>
+              {e.type === 1 ? <Typography variant='h6'>бюджет: {e.money}</Typography>
+                : e.type === 2 ? <>
+                  <Typography variant='h6'>где: {e.where}</Typography>
+                  <Typography variant='h6'>Во сколько: {e.time}</Typography>
+                </> : <Typography variant='h6'>{e.text}</Typography>}
+            </Card>
+          )}
+        </Box>
+      }
     </Container>
   )
 }
