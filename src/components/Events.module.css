@@ -1,0 +1,27 @@
+.root {
+  max-width: 650px;
+  overflow: auto;
+  max-height: 500px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 40px;
+}
+
+.root::-webkit-scrollbar {
+  width: 0;
+}
+
+.title {
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: normal;
+  color: rgb(20, 45, 66);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-top: 150;
+  max-width: 1200px;
+}

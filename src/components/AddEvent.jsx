@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import { Button, Container, FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core'
+import { Container, FormControl, InputLabel, MenuItem, Select, TextField } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import Datepicker from './Datapicker'
+import Datepicker from './Datepicker'
+import Button from './button/Button123'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    maxWidth: 350,
+    maxWidth: 300,
   },
   form: {
     minWidth: 200,
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginRight: 20
   },
-  data: {
+  date: {
     marginRight: 'auto',
     marginLeft: 'auto'
   }
@@ -24,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
 const AddEvent = () => {
   const classes = useStyles();
 
-  const [select, setSelect] = useState()
-  const [event, setEvent] = useState({data: "2021-09-10"})
+  const [select, setSelect] = useState(3)
+  const [event, setEvent] = useState({date: `${new Date().getMonth() + 1}/${new Date().getDate()}/${new Date().getFullYear()}`})
   const [events, setEvents] = useState([])
 
   useEffect(() => {
@@ -50,17 +51,19 @@ const AddEvent = () => {
   function saveEvent() {
     setEvents([...events, { ...event, id: Date.now(), type: select }])
     localStorage.setItem('events', JSON.stringify(events))
+    console.log(events)
   }
 
-  const eventData = (e) => {
-    setEvent({ ...event, data: e })
+  const eventdate = (date) => {
+    setEvent({ ...event, date: date })
+    return 1
   }
 
   return (
     <div>
       <h1>Добавить событие</h1>
       <Container className={classes.container}>
-        <Datepicker className={classes.data} eventData={eventData}/>
+        <Datepicker className={classes.date} startDate={eventdate}/>
         <TextField multiline onChange={e => setEvent({ ...event, title: e.target.value })} className={classes.block} id="outlined-basic" label="Название события" variant="outlined" />
         <FormControl className={classes.form}>
           <InputLabel>Тип события</InputLabel>
@@ -71,8 +74,16 @@ const AddEvent = () => {
           </Select>
         </FormControl>
         {selectedEvent}
-        <Button className={classes.button} variant="contained" color="primary" component={Link} to={'/development'}>Отмена</Button>
-        <Button onClick={saveEvent} variant="contained" color="primary" component={Link} to={'/add'}>Сохранить</Button>
+        <Link to={'/development'}>
+          <Button onClick={saveEvent}>
+            Отмена
+          </Button>
+        </Link>
+        <Link to={'/add'}>
+          <Button onClick={saveEvent}>
+            Сохранить
+          </Button>
+        </Link>
       </Container>
     </div>
   )

@@ -1,0 +1,20 @@
+.root {
+  width:600px;
+  border-bottom: 1px solid black;
+  text-align: left;
+}
+
+.title {
+  font-family: 'Balsamiq Sans', cursive;
+  color: rgb(75, 154, 224);
+  text-decoration: underline;
+  font-size: 20px;
+  font-weight: 700;
+  margin-left: 20px;
+}
+
+.text {
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: 400;
+  margin-left: 20px;
+}
