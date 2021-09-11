@@ -11,10 +11,28 @@
   font-size: 20px;
   font-weight: 700;
   margin-left: 20px;
+  display: inline-block;
+  margin-block-end: 0;
 }
 
 .text {
   font-family: 'Balsamiq Sans', cursive;
   font-weight: 400;
   margin-left: 20px;
+}
+
+.img {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.wrapper {
+  display: inline-block;
+  justify-content:space-between;
+  display: flex;
+}
+.imgWrapper {
+  margin-top: 15px;
 }

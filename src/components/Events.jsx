@@ -15,12 +15,14 @@ const Development = () => {
     }
   }, [startDate])
 
-
   const sortDate = (date) => {
     setStartDate(date)
     return 1
   }
 
+  const deleteEvent = (id) => {
+    setEvents(JSON.parse(localStorage.getItem("events")).filter(el => el.id != id))
+  }
 
   return (
     <div className={styles.container}>
@@ -29,12 +31,16 @@ const Development = () => {
         <Datepicker startDate={sortDate} />
       </div>
       <div>
-        {events.length > 0 &&
+        {events.filter(elem => elem.date === startDate).length > 0 &&
           <div className={styles.root}>
             {events.filter(elem => elem.date === startDate).map(e => {
-              return e.type === "1" ? <Card key={e.id} title={e.title} text1={e.text} />
-                : e.type === "2" ? <Card key={e.id} title={e.title} text1={`Бюджет: ${e.money}`} />
-                  : <Card key={e.id} title={e.title} text1={`Где: ${e.where}`} text2={`Во сколько: ${e.time}`} />
+              const deleteEvent = () => {
+                localStorage.setItem('events', JSON.stringify(events.filter(el => el.id != e.id)))
+                setEvents(JSON.parse(localStorage.getItem("events")))
+              }
+              return e.type === "1" ? <Card key={e.id} title={e.title} text1={e.text} deleteEvent={deleteEvent}/>
+                : e.type === "2" ? <Card key={e.id} title={e.title} text1={`Бюджет: ${e.money}`} deleteEvent={deleteEvent}/>
+                  : <Card key={e.id} title={e.title} text1={`Куда: ${e.where}`} text2={`Во сколько: ${e.time}`} deleteEvent={deleteEvent}/>
             }
             )}
           </div>

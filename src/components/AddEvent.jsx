@@ -57,29 +57,31 @@ const AddEvent = () => {
   return (
     <div>
       <div className={styles.container}>
-          <h1 className={styles.title}>Добавить событие</h1>
-          <h3 className={styles.title}>Выберите Дату:</h3>
-          <Datepicker className={styles.date} startDate={eventdate} />
-          <label className={styles.subtitle} style={{ display: 'block' }} htmlFor="selectedEvent">Тип события</label>
-          <select className={styles.input} onChange={e => setSelect(e.target.value)} name="" id="selectedEvent">
-            <option value="1">Пометки</option>
-            <option value="2">Праздничные дни</option>
-            <option value="3">Мероприятия</option>
-          </select>
-          <Input label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
-          {selectedEvent}
-          <div>
-          <Link to={'/development'} style={{display: 'inline-block', margin: '10px'}}>
+        <h1 className={styles.title}>Добавить событие</h1>
+        <h3 className={styles.title}>Выберите Дату:</h3>
+        <span className={styles.datapicker}>
+          <Datepicker startDate={eventdate} />
+        </span>
+        <label className={styles.subtitle} style={{ display: 'block' }} htmlFor="selectedEvent">Тип события</label>
+        <select className={styles.input} onChange={e => setSelect(e.target.value)} name="" id="selectedEvent">
+          <option value="1">Пометки</option>
+          <option value="2">Праздничные дни</option>
+          <option value="3">Мероприятия</option>
+        </select>
+        <Input label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
+        {selectedEvent}
+        <div>
+          <Link to={'/development'} style={{ display: 'inline-block', margin: '10px' }}>
             <Button onClick={saveEvent}>
               Отмена
             </Button>
           </Link>
-          <Link to={'/add'} style={{display: 'inline-block', margin: '10px'}}>
+          <Link to={'/add'} style={{ display: 'inline-block', margin: '10px' }}>
             <Button type='submit' onClick={formValidation}>
               Сохранить
             </Button>
           </Link>
-          </div>
+        </div>
       </div>
     </div>
   )
