@@ -11,8 +11,8 @@ export default function Datepicker(props) {
 
   const selectedDate = (date) => {
     setStartDate(date)
-    const D = new Date()
-    const dateFormat = `${D.getMonth() + 1}/${D.getDate()}/${D.getFullYear()}`
+    const d = date
+    const dateFormat = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`
     props.startDate(dateFormat)
   }
 

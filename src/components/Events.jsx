@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Datepicker from './Datepicker'
 import { Link } from 'react-router-dom';
-import Button from './button/Button123'
-import Card123 from './Card/Card123';
+import Button from './UI/button/Button123'
+import Card123 from './UI/card/Card123';
 import styles from './Events.module.css'
 
 const Development = () => {
@@ -17,7 +17,7 @@ const Development = () => {
 
 
   const sortDate = (date) => {
-    setStartDate([date])
+    setStartDate(date)
     return 1
   }
 
@@ -31,8 +31,8 @@ const Development = () => {
       <div>
         <div className={styles.root}>
           {events.filter(elem => elem.date === startDate).map(e => {
-            return e.type === 1 ? <Card123 key={e.id} title={e.title} text1={`Бюджет: ${e.money}`} />
-              : e.type === 2 ? <Card123 key={e.id} title={e.title} text1={`Где: ${e.where}`} text2={`Во сколько: ${e.time}`} />
+            return e.type === "1" ? <Card123 key={e.id} title={e.title} text1={`Бюджет: ${e.money}`} />
+              : e.type === "2" ? <Card123 key={e.id} title={e.title} text1={`Где: ${e.where}`} text2={`Во сколько: ${e.time}`} />
                 : <Card123 key={e.id} title={e.title} text1={e.text} />
           }
           )}
