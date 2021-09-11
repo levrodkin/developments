@@ -1,7 +1,27 @@
 .root {
-  margin: 15px;
+  margin: 10px;
 }
 
 .label {
   display: block;
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: 400;
+}
+
+.input {
+  font-family: 'Balsamiq Sans', cursive;
+  font-weight: 400;
+  width: 400px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  height: 2.5em;
+  font-size: 15px;
+  text-align: center;
+}
+
+.input:focus {
+  border-radius: 10px;
+  border: 2px solid rgb(65, 117, 202);
+  padding: 0;
+  outline: 0;
 }

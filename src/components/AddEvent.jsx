@@ -57,28 +57,29 @@ const AddEvent = () => {
   return (
     <div>
       <div className={styles.container}>
-        <form action="">
           <h1 className={styles.title}>Добавить событие</h1>
+          <h3 className={styles.title}>Выберите Дату:</h3>
           <Datepicker className={styles.date} startDate={eventdate} />
-          <Input label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
-          <label style={{ display: 'block' }} htmlFor="selectedEvent">Тип события</label>
-          <select onChange={e => setSelect(e.target.value)} name="" id="selectedEvent">
+          <label className={styles.subtitle} style={{ display: 'block' }} htmlFor="selectedEvent">Тип события</label>
+          <select className={styles.input} onChange={e => setSelect(e.target.value)} name="" id="selectedEvent">
             <option value="1">Пометки</option>
             <option value="2">Праздничные дни</option>
             <option value="3">Мероприятия</option>
           </select>
+          <Input label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
           {selectedEvent}
-          <Link to={'/development'}>
+          <div>
+          <Link to={'/development'} style={{display: 'inline-block', margin: '10px'}}>
             <Button onClick={saveEvent}>
               Отмена
             </Button>
           </Link>
-          <Link to={'/add'}>
+          <Link to={'/add'} style={{display: 'inline-block', margin: '10px'}}>
             <Button type='submit' onClick={formValidation}>
               Сохранить
             </Button>
           </Link>
-        </form>
+          </div>
       </div>
     </div>
   )

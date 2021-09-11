@@ -39,7 +39,7 @@ const Development = () => {
             )}
           </div>
         }
-        <Link to={'/add'} style={{ display: 'block', height: '100%' }}>
+        <Link to={'/add'} style={{ display: 'inline-block', margin: '10px' }}>
           <Button>
             Добавить
           </Button>
