@@ -1,38 +1,40 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom';
 import Datepicker from './Datepicker'
 import Button from './UI/button/Button'
 import styles from './AddEvent.module.css'
 import Input from './UI/Input/Input';
+import {Context} from '../Api/context'
 
-const AddEvent = () => {
-
-  const [select, setSelect] = useState('1')
-  const D = new Date()
-  const [event, setEvent] = useState(
-    { date: `${D.getMonth() + 1}/${D.getDate()}/${D.getFullYear()}`, title: '', money: '', where: '', time: '', text: '' })
+const EditEvent = (props) => {
+  
+  const {editEvent, setEditEvent} = useContext(Context)
   const [events, setEvents] = useState([])
-
   useEffect(() => {
     if (localStorage.getItem("events")) {
       setEvents(JSON.parse(localStorage.getItem("events")))
     }
   }, [])
+  const S = editEvent
+  const [event, setEvent] = useState(
+    { date: S.date, title: S.title, money: S.money, where: S.where, time: S.time, text: S.text, id: S.id, type: S.type })
+    const [select, setSelect] = useState(event.type)
 
-  let selectedEvent
+
+  let selectedType
   if (select === '1') {
-    selectedEvent = <Input label="Текст" type="text" placeholder='Введите текст' onChange={e => setEvent({ ...event, text: e.target.value })} />
+    selectedType = <Input value={event.text} label="Текст" type="text" placeholder='Введите текст' onChange={e => setEvent({ ...event, text: e.target.value })} />
   } else if (select === '2') {
-    selectedEvent = <Input label="Какой бюджет?" type="text" placeholder='Введите бюджет' onChange={e => setEvent({ ...event, money: e.target.value })} />
+    selectedType = <Input value={event.money} label="Какой бюджет?" type="text" placeholder='Введите бюджет' onChange={e => setEvent({ ...event, money: e.target.value })} />
   } else if (select === '3') {
-    selectedEvent = <>
-      <Input label="Куда?" type="text" placeholder='Введите Место' onChange={e => setEvent({ ...event, where: e.target.value })} />
-      <Input label="Во сколько?" type="text" placeholder='Введите время' onChange={e => setEvent({ ...event, time: e.target.value })} />
+    selectedType = <>
+      <Input value={event.where} label="Куда?" type="text" placeholder='Введите Место' onChange={e => setEvent({ ...event, where: e.target.value })} />
+      <Input value={event.time} label="Во сколько?" type="text" placeholder='Введите время' onChange={e => setEvent({ ...event, time: e.target.value })} />
     </>
   }
 
   function saveEvent() {
-    setEvents([...events, { ...event, id: Date.now(), type: select }])
+    setEvents([...events, { ...event, type: select }])
     localStorage.setItem('events', JSON.stringify(events))
   }
 
@@ -68,8 +70,8 @@ const AddEvent = () => {
           <option value="2">Праздничные дни</option>
           <option value="3">Мероприятия</option>
         </select>
-        <Input label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
-        {selectedEvent}
+        <Input value={event.title} label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
+        {selectedType}
         <div>
           <Link to={'/development'} style={{ display: 'inline-block', margin: '10px' }}>
             <Button onClick={saveEvent}>
@@ -87,4 +89,4 @@ const AddEvent = () => {
   )
 }
 
-export default AddEvent
+export default EditEvent

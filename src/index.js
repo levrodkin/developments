@@ -4,6 +4,6 @@ import App from './App';
 import './fonts/fonts.css';
 
 ReactDOM.render(
-    <App />,
+  <App />,
   document.getElementById('root')
 );
