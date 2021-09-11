@@ -8,7 +8,7 @@ import {Context} from '../Api/context'
 
 const EditEvent = (props) => {
   
-  const {editEvent, setEditEvent} = useContext(Context)
+  const {editEvent} = useContext(Context)
   const [events, setEvents] = useState([])
   useEffect(() => {
     if (localStorage.getItem("events")) {
@@ -59,7 +59,7 @@ const EditEvent = (props) => {
   return (
     <div>
       <div className={styles.container}>
-        <h1 className={styles.title}>Добавить событие</h1>
+        <h1 className={styles.title}>Изменить событие</h1>
         <h3 className={styles.title}>Выберите Дату:</h3>
         <span className={styles.datapicker}>
           <Datepicker startDate={eventdate} />
@@ -73,7 +73,7 @@ const EditEvent = (props) => {
         <Input value={event.title} label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
         {selectedType}
         <div>
-          <Link to={'/development'} style={{ display: 'inline-block', margin: '10px' }}>
+          <Link to={'/events'} style={{ display: 'inline-block', margin: '10px' }}>
             <Button onClick={saveEvent}>
               Отмена
             </Button>

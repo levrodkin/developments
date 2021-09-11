@@ -10,11 +10,11 @@ const routes = () => {
     <div>
       <Route
         render={() => <Development />}
-        path={'/development'}
+        path={'/events'}
         exact
       />
       <Route
-        render={() => <AddEvent />}
+        render={() =><AddEvent />}
         path={'/add'}
         exact
       />
@@ -23,7 +23,6 @@ const routes = () => {
         path={'/edit'}
         exact
       />
-      <Redirect to={'/development'} />
     </div>
   )
 }

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom';
 import Datepicker from './Datepicker'
 import Button from './UI/button/Button'
 import styles from './AddEvent.module.css'
 import Input from './UI/Input/Input';
+import {Context} from '../Api/context'
+
 
 const AddEvent = () => {
 
+
+
   const [select, setSelect] = useState('1')
-  const D = new Date()
-  const [event, setEvent] = useState(
-    { date: `${D.getMonth() + 1}/${D.getDate()}/${D.getFullYear()}`, title: '', money: '', where: '', time: '', text: '' })
+  const {event, setEvent} = useContext(Context)
   const [events, setEvents] = useState([])
 
   useEffect(() => {
@@ -26,7 +28,7 @@ const AddEvent = () => {
     selectedEvent = <Input label="Какой бюджет?" type="text" placeholder='Введите бюджет' onChange={e => setEvent({ ...event, money: e.target.value })} />
   } else if (select === '3') {
     selectedEvent = <>
-      <Input label="Куда?" type="text" placeholder='Введите Место' onChange={e => setEvent({ ...event, where: e.target.value })} />
+      <Input label="Куда?" type="text" placeholder='Укажите место' onChange={e => setEvent({ ...event, where: e.target.value })} />
       <Input label="Во сколько?" type="text" placeholder='Введите время' onChange={e => setEvent({ ...event, time: e.target.value })} />
     </>
   }
@@ -41,7 +43,7 @@ const AddEvent = () => {
     return 1
   }
 
-  const formValidation = () => {
+  const formValidation = (ev) => {
     const e = event
     if (select === '1' && e.text.length >= 4 && e.title.length >= 4) {
       saveEvent()
@@ -53,6 +55,7 @@ const AddEvent = () => {
       alert('Введите в каждое поле минимум 4 символа')
     }
   }
+
 
   return (
     <div>
@@ -71,13 +74,13 @@ const AddEvent = () => {
         <Input label="Название события" type="text" placeholder='Введите название' onChange={e => setEvent({ ...event, title: e.target.value })} />
         {selectedEvent}
         <div>
-          <Link to={'/development'} style={{ display: 'inline-block', margin: '10px' }}>
+          <Link to={'/events'} style={{ display: 'inline-block', margin: '10px' }}>
             <Button onClick={saveEvent}>
               Отмена
             </Button>
           </Link>
           <Link to={'/add'} style={{ display: 'inline-block', margin: '10px' }}>
-            <Button type='submit' onClick={formValidation}>
+            <Button type='submit' onClick={e => formValidation(e)}>
               Сохранить
             </Button>
           </Link>

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 const Card = (props) => {
   
-  const {editEvent, setEditEvent} = useContext(Context)
+  const {setEditEvent} = useContext(Context)
   const [cardState, setCardState] = useState()
 
   const enableHoverCard = () => {
