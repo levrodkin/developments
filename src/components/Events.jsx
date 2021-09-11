@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Datepicker from './Datepicker'
 import { Link } from 'react-router-dom';
-import Button from './UI/button/Button123'
-import Card123 from './UI/card/Card123';
+import Button from './UI/button/Button'
+import Card from './UI/card/Card';
 import styles from './Events.module.css'
 
 const Development = () => {
@@ -29,14 +29,16 @@ const Development = () => {
         <Datepicker startDate={sortDate} />
       </div>
       <div>
-        <div className={styles.root}>
-          {events.filter(elem => elem.date === startDate).map(e => {
-            return e.type === "1" ? <Card123 key={e.id} title={e.title} text1={`Бюджет: ${e.money}`} />
-              : e.type === "2" ? <Card123 key={e.id} title={e.title} text1={`Где: ${e.where}`} text2={`Во сколько: ${e.time}`} />
-                : <Card123 key={e.id} title={e.title} text1={e.text} />
-          }
-          )}
-        </div>
+        {events.length > 0 &&
+          <div className={styles.root}>
+            {events.filter(elem => elem.date === startDate).map(e => {
+              return e.type === "1" ? <Card key={e.id} title={e.title} text1={e.text} />
+                : e.type === "2" ? <Card key={e.id} title={e.title} text1={`Бюджет: ${e.money}`} />
+                  : <Card key={e.id} title={e.title} text1={`Где: ${e.where}`} text2={`Во сколько: ${e.time}`} />
+            }
+            )}
+          </div>
+        }
         <Link to={'/add'} style={{ display: 'block', height: '100%' }}>
           <Button>
             Добавить

@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './Card123.module.css'
+import styles from './Card.module.css'
 
-const Card123 = (props) => {
+const Card = (props) => {
   return (
     <div className={styles.root} key={props.key}>
       <h3 className={styles.title}>{props.title}</h3>
@@ -11,4 +11,4 @@ const Card123 = (props) => {
   )
 }
 
-export default Card123
+export default Card

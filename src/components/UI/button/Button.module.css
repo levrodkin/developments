@@ -1,4 +1,4 @@
-.button123 {
+.Button {
   padding: 6px 16px;
   background-color: #0d00c0;
   color: rgb(255, 255, 255);
@@ -14,6 +14,6 @@
   margin: 10px
 }
 
-.button123:hover {
+.Button:hover {
   background-color: #021999;
 }

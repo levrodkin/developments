@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import Datepicker from './Datepicker'
-import Button from './UI/button/Button123'
+import Button from './UI/button/Button'
 import styles from './AddEvent.module.css'
 import Input from './UI/Input/Input';
 
@@ -10,7 +10,7 @@ const AddEvent = () => {
   const [select, setSelect] = useState('1')
   const D = new Date()
   const [event, setEvent] = useState(
-    {date: `${D.getMonth() + 1}/${D.getDate()}/${D.getFullYear()}`, title: '', money: '', where: '', time: '', text: ''})
+    { date: `${D.getMonth() + 1}/${D.getDate()}/${D.getFullYear()}`, title: '', money: '', where: '', time: '', text: '' })
   const [events, setEvents] = useState([])
 
   useEffect(() => {
@@ -21,14 +21,14 @@ const AddEvent = () => {
 
   let selectedEvent
   if (select === '1') {
-    selectedEvent = <Input label="Бюджет?" type="text" placeholder='Введите бюджет' onChange={e => setEvent({ ...event, money: e.target.value })}/>
+    selectedEvent = <Input label="Текст" type="text" placeholder='Введите текст' onChange={e => setEvent({ ...event, text: e.target.value })} />
   } else if (select === '2') {
+    selectedEvent = <Input label="Бюджет?" type="text" placeholder='Введите бюджет' onChange={e => setEvent({ ...event, money: e.target.value })} />
+  } else if (select === '3') {
     selectedEvent = <>
       <Input label="Куда?" type="text" placeholder='Введите Место' onChange={e => setEvent({ ...event, where: e.target.value })} />
       <Input label="Во сколько?" type="text" placeholder='Введите время' onChange={e => setEvent({ ...event, time: e.target.value })} />
     </>
-  } else if (select === '3') {
-    selectedEvent = <Input label="Текст" type="text" placeholder='Введите текст' onChange={e => setEvent({ ...event, text: e.target.value })} />
   }
 
   function saveEvent() {
@@ -42,8 +42,12 @@ const AddEvent = () => {
   }
 
   const formValidation = () => {
-    const e = event 
-    if (e.title.length >= 4 && e.mone.length >= 4 && e.where.length >= 4 && e.time.length >= 4 && e.text.length >= 4) {
+    const e = event
+    if (select === '1' && e.text.length >= 4 && e.title.length >= 4) {
+      saveEvent()
+    } else if (select === '2' && e.money.length >= 4 && e.title.length >= 4) {
+      saveEvent()
+    } else if (select === '3' && e.where.length >= 4 && e.time.length >= 4 && e.title.length >= 4) {
       saveEvent()
     } else {
       alert('Введите в каждое поле минимум 4 символа')
