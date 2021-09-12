@@ -1,8 +1,8 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router'
-import AddEvent from './components/AddEvent'
-import EditEvent from './components/EditEvent'
-import Development from './components/Events'
+import AddEvent from './pages/AddEvent'
+import EditEvent from './pages/EditEvent'
+import Development from './pages/Events'
 
 
 const routes = () => {
@@ -10,7 +10,7 @@ const routes = () => {
     <div>
       <Route
         render={() => <Development />}
-        path={'/events'}
+        path={'/'}
         exact
       />
       <Route

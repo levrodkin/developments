@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom'
 
 const Card = (props) => {
   
-  const {setEditEvent} = useContext(Context)
+  const {setEditableEvent} = useContext(Context)
   const [cardState, setCardState] = useState()
 
   const enableHoverCard = () => {
     setCardState(<>
       <div className={styles.imgWrapper}>
         <Link to={'edit'}>
-        <img onClick={funcEditEvent} className={styles.img} src="./pencil.svg" alt="Редактировать" />
+        <img onClick={editEvent} className={styles.img} src="./pencil.svg" alt="Редактировать" />
         </Link>
         <img onClick={props.deleteEvent} className={styles.img} src="./delete.svg" alt="Удалить" />
       </div>
@@ -23,8 +23,8 @@ const Card = (props) => {
   const disableHoverCard = () => setCardState()
 
 
-  const funcEditEvent = () => {
-    setEditEvent(props.e)
+  const editEvent = () => {
+    setEditableEvent(props.e)
   }
 
   return (
