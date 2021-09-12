@@ -36,6 +36,8 @@ const AddEvent = () => {
   function saveEvent() {
     setEvents([...events, { ...event, id: Date.now(), type: select }])
     localStorage.setItem('events', JSON.stringify(events))
+    const D = new Date()
+    setEvent({ date: `${D.getMonth() + 1}/${D.getDate()}/${D.getFullYear()}`, title: '', money: '', where: '', time: '', text: '' })
   }
 
   const eventdate = (date) => {
