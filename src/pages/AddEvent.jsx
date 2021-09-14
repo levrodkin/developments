@@ -5,6 +5,7 @@ import Button from '../components/UI/button/Button'
 import styles from './AddEvent.module.css'
 import Input from '../components/UI/Input/Input';
 import { Context } from '../Api/context'
+import Swal from 'sweetalert2'
 
 
 const AddEvent = () => {
@@ -44,16 +45,26 @@ const AddEvent = () => {
     setEvent({ ...event, date: date })
   }
 
+  const alert = () => Swal.fire(
+    'Успех!',
+    'Вы успешно создали событие',
+    'success'
+  )
+
   const formValidation = () => {
     const e = event
     if (select === '1' && e.text.length >= 4 && e.title.length >= 4) {
-      saveEvent()
+      saveEvent(); alert()
     } else if (select === '2' && e.money.length >= 4 && e.title.length >= 4) {
-      saveEvent()
+      saveEvent(); alert()
     } else if (select === '3' && e.where.length >= 4 && e.time.length >= 4 && e.title.length >= 4) {
-      saveEvent()
+      saveEvent(); alert()
     } else {
-      alert('Введите в каждое поле минимум 4 символа')
+      Swal.fire(
+        'Ошибка!',
+        'Введите в каждое поле минимум 4 символа',
+        'error'
+      )
     }
   }
 
@@ -76,7 +87,7 @@ const AddEvent = () => {
         {selectedEvent}
         <div>
           <Link to={'/'} style={{ display: 'inline-block', margin: '10px' }}>
-            <Button onClick={saveEvent}>
+            <Button>
               Отмена
             </Button>
           </Link>
