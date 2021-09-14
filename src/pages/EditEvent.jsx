@@ -5,11 +5,14 @@ import Button from '../components/UI/button/Button'
 import styles from './AddEvent.module.css'
 import Input from '../components/UI/Input/Input';
 import { Context } from '../Api/context'
+import Swal from 'sweetalert2'
 
 const EditEvent = (props) => {
 
   const { editableEvent, event, setEvent } = useContext(Context)
   const [events, setEvents] = useState([])
+  
+  
   useEffect(() => {
     if (localStorage.getItem("events")) {
       setEvents(JSON.parse(localStorage.getItem("events")))
@@ -17,7 +20,11 @@ const EditEvent = (props) => {
     const S = editableEvent
     setEvent((
       { date: S.date, title: S.title, money: S.money, where: S.where, time: S.time, text: S.text, id: S.id, type: S.type }))
-  }, [])
+    }, [])
+    
+    useEffect(() => {
+      localStorage.setItem('events', JSON.stringify(events))
+    }, [events])
 
 
   let selectedType
@@ -34,13 +41,19 @@ const EditEvent = (props) => {
 
   function saveEvent() {
     setEvents([...events, { ...event}])
-    localStorage.setItem('events', JSON.stringify(events))
+    alert()
   }
 
   const eventdate = (date) => {
     setEvent({ ...event, date: date })
     return 1
   }
+
+  const alert = () => Swal.fire(
+    'Успех!',
+    'Вы успешно изменили событие',
+    'success'
+  )
 
   const formValidation = () => {
     const e = event
@@ -51,7 +64,11 @@ const EditEvent = (props) => {
     } else if (event.type === '3' && e.where.length >= 4 && e.time.length >= 4 && e.title.length >= 4) {
       saveEvent()
     } else {
-      alert('Введите в каждое поле минимум 4 символа')
+      Swal.fire(
+        'Ошибка!',
+        'Введите в каждое поле минимум 4 символа',
+        'error'
+      )
     }
   }
 
@@ -73,15 +90,13 @@ const EditEvent = (props) => {
         {selectedType}
         <div>
           <Link to={'/'} style={{ display: 'inline-block', margin: '10px' }}>
-            <Button onClick={saveEvent}>
+            <Button>
               Отмена
             </Button>
           </Link>
-          <Link to={'/add'} style={{ display: 'inline-block', margin: '10px' }}>
             <Button type='submit' onClick={formValidation}>
               Сохранить
             </Button>
-          </Link>
         </div>
       </div>
     </div>
